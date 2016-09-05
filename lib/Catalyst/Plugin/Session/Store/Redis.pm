@@ -91,8 +91,8 @@ sub _verify_redis_connection {
     } catch {
         $c->_session_redis_storage(
             Redis->new(
-                server    => $cfg->{redis_server} || '127.0.0.1:6379',
-                debug     => $cfg->{redis_debug} || 0,
+                server    => $cfg->{redis_server}    || '127.0.0.1:6379',
+                debug     => $cfg->{redis_debug}     || 0,
                 reconnect => $cfg->{redis_reconnect} || 0
             )
         );
