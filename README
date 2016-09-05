@@ -1,0 +1,54 @@
+NAME
+
+Catalyst::Plugin::Session::Store::Redis - The great new Catalyst::Plugin::Session::Store::Redis!
+
+SYNOPSIS
+
+    use Catalyst qw/
+        Session
+        Session::Store::Redis
+        Session::State::Foo
+    /;
+    
+    MyApp->config->{session} = {
+        expires => 3600,
+        redis_server => '127.0.0.1:6379',
+        redis_debug => 0 # or 1!
+    };
+
+    # ... in an action:
+    $c->session->{foo} = 'bar'; # will be saved
+
+DESCRIPTION
+
+Catalyst::Plugin::Session::Store::Redis is a session storage plugin for
+Catalyst that uses the Redis key-value database.
+
+NOTES
+
+Expired Sessions
+
+This store does B<not> automatically expire sessions.  You can call
+C<delete_expired_sessions> to clear any expired sessions.  All sessions will
+then be checked, one at a time.  If a session has expired then it will be
+deleted.
+
+WARNING
+
+This module is currently untested, outside of the unit tests it ships with.
+It will eventually be used with a busy site, but is currently unproven.
+Patches are welcome!
+
+AUTHOR
+
+Cory G Watson, C<< <gphat at cpan.org> >>
+
+COPYRIGHT & LICENSE
+
+Copyright 2009 Cold Hard Code, LLC.
+
+This program is free software; you can redistribute it and/or modify it
+under the terms of either: the GNU General Public License as published
+by the Free Software Foundation; or the Artistic License.
+
+See http://dev.perl.org/licenses/ for more information.
