@@ -103,10 +103,6 @@ sub _verify_redis_connection {
 
 __END__
 
-=head1 NAME
-
-Catalyst::Plugin::Session::Store::Redis - Redis Session store for Catalyst
-
 =head1 SYNOPSIS
 
     use Catalyst qw/
@@ -128,8 +124,33 @@ Catalyst::Plugin::Session::Store::Redis - Redis Session store for Catalyst
 =head1 DESCRIPTION
 
 C<Catalyst::Plugin::Session::Store::Redis> is a session storage plugin for
-Catalyst that uses the Redis (L<http://code.google.com/p/redis/>) key-value
+Catalyst that uses the Redis (L<http://redis.io/>) key-value
 database.
+
+=head2 CONFIGURATION
+
+=head3 redis_server
+
+The IP address and port where your Redis is running. Default: 127.0.0.1:6379
+
+=head3 redis_debug
+
+Boolean flag to turn Redis debug messages on/off. Default: 0, i.e. off
+
+Turing this on will cause the Redis Perl bindings to output debug
+messages to STDOUT. This setting does not influence the logging this
+module does via C<< $c->log >>
+
+=head3 redis_reconnect
+
+Boolean flag. Default: 0, i.e. off.
+
+It is highly recommended that you enable this setting. If set to C<0>,
+your app might not be able to reconnect to C<Redis> if the C<Redis>
+server was restarted.
+
+I leave the default of setting at C<0> for now because changing it
+might break existing apps.
 
 =head1 NOTES
 
@@ -140,28 +161,19 @@ database.
 This store does B<not> automatically expires sessions.  There is no need to
 call C<delete_expired_sessions> to clear any expired sessions.
 
+domm: No idea what this means.
+
+=item B<session expiry>
+
+Currently this module does not use C<Redis> Expiry to clean out old
+session. I might look into this in the future. But patches are welcome!
+
 =back
 
-=head1 WARNING
-
-This module is currently untested, outside of the unit tests it ships with.
-It will eventually be used with a busy site, but is currently unproven.
-Patches are welcome!
-
-=head1 AUTHOR
+=head1 AUTHORS
 
 Cory G Watson, C<< <gphat at cpan.org> >>
 
-C<redis_reconnect> added by Thomas Klausner C<< domm@cpan.org >>, see also https://rt.cpan.org/Ticket/Display.html?id=75586
-
-=head1 COPYRIGHT & LICENSE
-
-Copyright 2009 Cold Hard Code, LLC.
-
-This program is free software; you can redistribute it and/or modify it
-under the terms of either: the GNU General Public License as published
-by the Free Software Foundation; or the Artistic License.
-
-See http://dev.perl.org/licenses/ for more information.
+Thomas Klausner C<< domm@cpan.org >>
 
 =cut
