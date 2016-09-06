@@ -2,6 +2,8 @@ package Catalyst::Plugin::Session::Store::Redis;
 use warnings;
 use strict;
 
+# ABSTRACT: Redis Session store for Catalyst
+
 use base qw/
     Class::Data::Inheritable
     Catalyst::Plugin::Session::Store
@@ -12,7 +14,7 @@ use Redis;
 use Storable qw/nfreeze thaw/;
 use Try::Tiny;
 
-our $VERSION = '0.06';
+our $VERSION = '0.07';
 
 __PACKAGE__->mk_classdata(qw/_session_redis_storage/);
 
