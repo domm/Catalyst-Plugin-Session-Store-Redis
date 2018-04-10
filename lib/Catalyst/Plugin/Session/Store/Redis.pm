@@ -98,6 +98,9 @@ sub _verify_redis_connection {
                 reconnect => $cfg->{redis_reconnect} || 0
             )
         );
+        if ($c->_session_redis_storage && $cfg->{redis_db}) {
+            $c->_session_redis_storage->select($cfg->{redis_db});
+        }
     };
 }
 
@@ -116,8 +119,9 @@ __END__
     MyApp->config->{Plugin::Session} = {
         expires => 3600,
         redis_server => '127.0.0.1:6379',
-        redis_debug => 0 # or 1!
-        redis_reconnect => 0 # or 1
+        redis_debug => 0, # or 1!
+        redis_reconnect => 0, # or 1
+        redis_db => 5, # or 0 by default
     };
 
     # ... in an action:
