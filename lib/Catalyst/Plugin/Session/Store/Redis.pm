@@ -180,6 +180,18 @@ session. I might look into this in the future. But patches are welcome!
 
 Cory G Watson, C<< <gphat at cpan.org> >>
 
+=head2 Current Maintainer
+
 Thomas Klausner C<< domm@cpan.org >>
+
+=head2 Contributors
+
+=over
+
+=item * Andreas Granig L<https://github.com/agranig>
+
+=item * Mohammad S Anwar L<https://github.com/manwar>
+
+=back
 
 =cut
