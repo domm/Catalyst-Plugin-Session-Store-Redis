@@ -1,2 +1,3 @@
 Catalyst-Plugin-Session-Store-Redis*
 local
+.build
