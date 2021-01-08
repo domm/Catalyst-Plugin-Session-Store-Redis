@@ -4,7 +4,7 @@ Catalyst::Plugin::Session::Store::Redis - Redis Session store for Catalyst
 
 # VERSION
 
-version 0.10
+version 0.900
 
 # SYNOPSIS
 
