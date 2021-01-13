@@ -42,20 +42,19 @@ sub store_session_data {
 
     $c->_verify_redis_connection;
 
-    if(my ($sid) = $key =~ /^expires:(.*)/) {
+    my $exp      = $c->session_expires;
+    my $duration = $exp - time;
+
+    if (my ($sid) = $key =~ /^expires:(.*)/) {
         $c->log->debug("Setting expires key for $sid: $data");
         $c->_session_redis_storage->set($key, $data);
+        $c->_session_redis_storage->expire("session:$sid", $duration);
     } else {
         $c->log->debug("Setting $key");
         $c->_session_redis_storage->set($key, encode_base64(nfreeze($data)));
     }
 
-    # We use expire, not expireat because it's a 1.2 feature and as of this
-    # release, 1.2 isn't done yet.
-    my $exp = $c->session_expires;
-    my $duration = $exp - time;
     $c->_session_redis_storage->expire($key, $duration);
-    # $c->_session_redis_storage->expireat($key, $exp);
 
     return;
 }
